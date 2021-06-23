@@ -29,7 +29,7 @@ void connectToWifi()
   }
 
   IPAddress address = WiFi.localIP();
-  ESP_LOGI(TAG, "IP address: %d.%d.%d.%d\n", address[0], address[1], address[2], address[3]);
+  ESP_LOGI(TAG, "IP address: %d.%d.%d.%d", address[0], address[1], address[2], address[3]);
 }
 
 const char* mqtt_broker = "192.168.1.129";
@@ -51,10 +51,10 @@ void reconnect()
   {
     if (mqttClient.connect("UltrasonicESP32Client"))
     {
-      ESP_LOGI(TAG, "Connected\n");
+      ESP_LOGI(TAG, "Connected");
     } else
     {
-      ESP_LOGI(TAG, "Failed, rc=%d\n", mqttClient.state());
+      ESP_LOGI(TAG, "Failed, rc=%d", mqttClient.state());
       delay(5000);
     }
   }
@@ -79,10 +79,10 @@ void loop() {
       distance = sonar[i].ping_cm();
       distance = distance == 0 ? MAX_DISTANCE : distance;
 
-      sprintf(topic, "ultrasonic/%u", i);
+      sprintf(topic, "ultrasonic/%u", i);   //Per iscriversi: topic "ultrasonic/+"
       sprintf(msg, "%lu", distance);
       mqttClient.publish(topic, msg);
-      ESP_LOGI(TAG, "Published on topic: %s\tMessage:%s\n", topic, msg);
+      ESP_LOGI(TAG, "Published on topic: %s\tMessage:%s", topic, msg);
     }
   }
 }
