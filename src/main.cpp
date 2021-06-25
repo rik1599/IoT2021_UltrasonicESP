@@ -25,24 +25,19 @@ void connectToWifi()
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
-    ESP_LOGI(TAG, ".");
   }
 
   IPAddress address = WiFi.localIP();
   ESP_LOGI(TAG, "IP address: %d.%d.%d.%d", address[0], address[1], address[2], address[3]);
 }
 
-const char* mqtt_broker = "192.168.1.129";
+const char* mqttBroker = "192.168.1.129";
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
-long lastMsg = 0;
-char msg[10];
-char topic[20];
-int value = 0;
 void setup() {
   // put your setup code here, to run once:
   connectToWifi();
-  mqttClient.setServer(mqtt_broker, 1883);
+  mqttClient.setServer(mqttBroker, 1883);
 }
 
 void reconnect()
@@ -62,6 +57,9 @@ void reconnect()
 
 unsigned long now = 0;
 unsigned long distance = 0;
+long lastMsg = 0;
+char msg[10];
+char topic[20];
 void loop() {
   // put your main code here, to run repeatedly:
   if (!mqttClient.connected())
