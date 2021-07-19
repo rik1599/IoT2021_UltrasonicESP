@@ -68,7 +68,7 @@ void loop() {
   }
   
   now = millis();
-  if (now - lastMsg > 1000)
+  if (now - lastMsg > 300)
   {
     lastMsg = now;
     for (uint8_t i = 0; i < SONAR_NUM; i++)
