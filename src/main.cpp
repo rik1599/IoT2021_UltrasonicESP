@@ -14,8 +14,8 @@ NewPing sonar[SONAR_NUM] = {
   NewPing(17, 16, MAX_DISTANCE)
 };
 
-const char* ssid = "FASTWEB-9TX27H";
-const char* password = "SFW4BNJMAT";
+const char* ssid = "TIM-20917905";
+const char* password = "antonutti_lollipop5";
 void connectToWifi()
 {
   delay(10);
@@ -31,7 +31,7 @@ void connectToWifi()
   ESP_LOGI(TAG, "IP address: %d.%d.%d.%d", address[0], address[1], address[2], address[3]);
 }
 
-const char* mqttBroker = "192.168.1.129";
+const char* mqttBroker = "192.168.1.133";
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 void setup() {
@@ -68,7 +68,7 @@ void loop() {
   }
   
   now = millis();
-  if (now - lastMsg > 1000)
+  if (now - lastMsg > 300)
   {
     lastMsg = now;
     for (uint8_t i = 0; i < SONAR_NUM; i++)
